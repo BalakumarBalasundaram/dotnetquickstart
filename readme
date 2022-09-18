@@ -15,3 +15,26 @@ Add Source:
 
     Package Sources-> should display -> Nuget.org
     Other Package Source -> Microsoft Visual Studio Offlien Packages -> Installed path -> Under Microsoft SDks - NuGetPackages
+
+Use the docker-compose file, trigger the containers.
+
+Login to mysql container with root user
+docker-compose exec mysql bash -c 'mysql -u root -p$MYSQL_ROOT_PASSWORD'
+
+Enable binary logging
+add comamnds in docker-compose
+--server-id=1
+      --log-bin=mysql-bin
+      --max-binlog-size=4096
+      --binlog-format=ROW
+      --sync-binlog=1
+      --log-slave-updates=ON
+      --gtid-mode=ON
+      --enforce-gtid-consistency=ON
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --max-connections=1000
+      --read-only=OFF
+      --binlog-rows-query-log-events=ON
+      
+How to create base project for dotnet?
