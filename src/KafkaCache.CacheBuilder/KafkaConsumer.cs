@@ -10,16 +10,16 @@ namespace KafkaCache.CacheBuilder
 {
     class KafkaConsumer
     {
-         static async Task Main(string[] args)
+         static void Main(string[] args)
         {
             var consumerConfig = new ConsumerConfig
             {
                 GroupId = "products.cache.builder.group.id",
-                BootstrapServers = "localhost:9092",
+                BootstrapServers = "localhost:29092",
                 AutoOffsetReset = AutoOffsetReset.Earliest,
             };
 
-            var producerConfig = new ProducerConfig { BootstrapServers = "localhost:9092" };
+            var producerConfig = new ProducerConfig { BootstrapServers = "localhost:29092" };
             var cacheTopic = "products.cache";
 
             using (var c = new ConsumerBuilder<string, string>(consumerConfig).Build())
@@ -36,7 +36,8 @@ namespace KafkaCache.CacheBuilder
                                 var cr = c.Consume();
                                 var key = JsonConvert.DeserializeObject<ProductKey>(cr.Key);
 
-                                await p.ProduceAsync(cacheTopic, new Message<int, string> { Value = cr.Value, Key = key.Id });
+                                Console.WriteLine(cr.Key.ToString());
+                                p.ProduceAsync(cacheTopic, new Message<int, string> { Value = cr.Value, Key = key.Id });
                             }
                             catch (Exception e)
                             {
