@@ -36,5 +36,32 @@ add comamnds in docker-compose
       --max-connections=1000
       --read-only=OFF
       --binlog-rows-query-log-events=ON
-      
+
+Add debezium connector
+
+curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" localhost:8083/connectors/ -d '{ "name": "mystore-connector", "config": { "connector.class": "io.debezium.connector.mysql.MySqlConnector", "tasks.max": "1", "database.hostname": "mysql", "database.port": "3306", "database.user": "root", "database.password": "123456", "database.server.id": "223345", "database.server.name": "mysql", "database.whitelist": "mystore", "database.history.kafka.bootstrap.servers": "kafka:9092", "database.history.kafka.topic": "dbhistory.mystore",
+"transforms":"unwrap","transforms.unwrap.type":"io.debezium.transforms.UnwrapFromEnvelope","transforms.unwrap.drop.tombstones":"false","key.converter": "org.apache.kafka.connect.json.JsonConverter","key.converter.schemas.enable": "false","value.converter": "org.apache.kafka.connect.json.JsonConverter","value.converter.schemas.enable": "false","include.schema.changes": "false"} }'
+
+check connector status
+curl localhost:8083/connectors/mystore-connector/status
+
+check kafka topics 
+kafka-topics --bootstrap-server kafka:9092 --list
+__consumer_offsets
+connect-status
+dbhistory.mystore
+my_connect_configs
+my_connect_offsets
+
+docker-compose exec kafka bash
+
+Add Kowl to monitor kafka
+
 How to create base project for dotnet?
+mkdir src
+cd src/
+dotnet new sln --name KafkaCache
+dotnet new console -o KafkaCache.CacheBuilder
+dotnet sln add KafkaCache.CacheBuilder/KafkaCache.CacheBuilder.csproj
+dotnet add KafkaCache.CacheBuilder/KafkaCache.CacheBuilder.csproj  package Confluent.Kafka --version 1.0.0-RC1
+dotnet add KafkaCache.CacheBuilder/KafkaCache.CacheBuilder.csproj package Newtonsoft.Json --version 12.0.1
