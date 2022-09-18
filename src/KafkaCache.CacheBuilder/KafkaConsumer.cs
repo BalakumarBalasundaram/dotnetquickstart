@@ -6,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Best Cahe Validation
+//https://towardsdatascience.com/beat-cache-invalidation-in-asp-net-core-using-kafka-and-debezium-65cd1d80554d
+
 namespace KafkaCache.CacheBuilder
 {
     class KafkaConsumer
