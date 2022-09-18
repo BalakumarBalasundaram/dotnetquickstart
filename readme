@@ -1,1 +1,13 @@
 learn dotnet quickly
+install dotnet in windows machine
+dotnet --version
+Versionn 6.0.401 is installed
+
+Visual studio community
+Quick Steps: Tools  -> NuGet Package Manager -> Package Manager settings -> Package Sources
+Add Source:
+    -> Source: https://api.nuget.org/v3/index.json
+    -> name: nuget.org
+
+    Package Sources-> should display -> Nuget.org
+    Other Package Source -> Microsoft Visual Studio Offlien Packages -> Installed path -> Under Microsoft SDks - NuGetPackages
