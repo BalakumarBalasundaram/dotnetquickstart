@@ -1,5 +1,9 @@
 learn dotnet quickly
 install dotnet in windows machine
+
+1. [Install .NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)
+2. [Install the Azure Functions Core Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash%2Ckeda#install-the-azure-functions-core-tools)
+
 dotnet --version
 Versionn 6.0.401 is installed
 
